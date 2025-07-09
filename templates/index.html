@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Price Estimator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('theme', filename='style.css') }}">
+</head>
+<body class="container mt-5">
+  <h1 class="mb-4">🏡 AI Home Price Estimator</h1>
+
+  <form method="POST" action="/predict">
+    <input class="form-control mb-2" name="GrLivArea" placeholder="Living Area (sqft)" required>
+    <input class="form-control mb-2" name="BedroomAbvGr" placeholder="Bedrooms" required>
+    <input class="form-control mb-2" name="FullBath" placeholder="Full Bathrooms" required>
+    <input class="form-control mb-2" name="GarageCars" placeholder="Garage Cars" required>
+    <input class="form-control mb-2" name="YearBuilt" placeholder="Year Built" required>
+    <input class="form-control mb-2" name="OverallQual" placeholder="Overall Quality (1-10)" required>
+
+    <select name="Neighborhood" class="form-control mb-2" required>
+      <option value="">Select Neighborhood</option>
+      <option value="CollgCr">College Creek</option>
+      <option value="Veenker">Veenker</option>
+      <option value="Crawfor">Crawford</option>
+      <option value="NoRidge">Northridge</option>
+      <!-- Add more neighborhoods as needed -->
+    </select>
+
+    <select name="HouseStyle" class="form-control mb-3" required>
+      <option value="">Select House Style</option>
+      <option value="1Story">1 Story</option>
+      <option value="2Story">2 Story</option>
+      <option value="1.5Fin">1.5 Story Finished</option>
+      <!-- Add more house styles as needed -->
+    </select>
+
+    <button class="btn btn-primary">Estimate Price</button>
+  </form>
+
+  {% if prediction %}
+    <div class="alert alert-success mt-4">
+      <h4>Estimated Price: {{ prediction }}</h4>
+    </div>
+  {% endif %}
+</body>
+</html>
